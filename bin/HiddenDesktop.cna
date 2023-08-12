@@ -94,10 +94,10 @@ beacon_command_register(
 );
 
 sub hd_launch_specific {
-    $deskn = pref_get(beacon_info( $1, "bid" ) . ".desktop", $null);
+    $deskn = pref_get(beacon_info( $b, "bid" ) . ".desktop", $null);
     if($deskn eq $null)
     {
-        berror( $1, "No desktop name saved\n" );
+        berror( $b, "No desktop name saved\n" );
         return;
     }
 
@@ -106,7 +106,7 @@ sub hd_launch_specific {
     $hdrw = readb( $hdfs, -1 );
     closef( $hdfs );
 
-    btask($1, "Launching " . $app . " on desktop " . $deskn);
+    btask($b, "Launching " . $app . " on desktop " . $deskn);
     $argvs = bof_pack( $b, "z", $deskn );
     beacon_inline_execute( $b, $hdrw, "go", $argvs );
 }
@@ -194,11 +194,11 @@ alias hd-launch {
 
     if ( @args[0] eq $null || !$command )
     {
-        berror( $1, "Usage: hd-launch <desktop name> <command> [arguments]\n" );
+        berror( $1, "Usage: hd-launch <command> [arguments]\n" );
         return;
     }
-    
-    $task =  "Executing '". $command . " " . $arguments . "' on desktop" . $deskn;
+
+    $task =  "Executing '". $command . " " . $arguments . "' on " . $deskn;
     if( !$arguments )
     {
         $arguments = "NA";
