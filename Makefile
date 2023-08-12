@@ -18,10 +18,10 @@ OUT 		:= bin
 SCFLAGS  	:= $(SCFLAGS) -Os -fno-asynchronous-unwind-tables -nostdlib 
 SCFLAGS  	:= $(SCFLAGS) -fno-ident -fpack-struct=8 -falign-functions=1 
 SCFLAGS 	:= $(SCFLAGS) -s -ffunction-sections -falign-jumps=1 
-SCFLAGS  	:= $(SCFLAGS) -falign-labels=1 -fPIC -fno-exceptions -Wall -Werror 
+SCFLAGS  	:= $(SCFLAGS) -falign-labels=1 -fPIC -fno-exceptions -Wall -Werror -Wno-array-bounds
 SCFLAGS  	:= $(SCFLAGS) -Wl,-s,--no-seh,--enable-stdcall-fixup,-T$(CLIENT)/LinkOrder.ld
 
-BFFLAGS 	:= $(BFFLAGS) -Os -s -Qn -nostdlib -Werror -Wall
+BFFLAGS 	:= $(BFFLAGS) -Os -s -Qn -nostdlib -Werror -Wall -Wno-array-bounds
 BFFLAGS 	:= $(BFFLAGS) -Wl,-s,--exclude-all-symbols,--no-leading-underscore
 
 .PHONY: default release client server launchers clean zip
