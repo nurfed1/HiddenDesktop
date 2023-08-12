@@ -136,7 +136,7 @@ VOID WINAPI BofMain( PBAPI_TABLE BeaconApi, PVOID Argv, INT Argc )
 
     startupInfo.cb = sizeof( startupInfo );
     startupInfo.lpDesktop = DesktopName;
-    proc = Api.CreateProcessA( Command, Arguments, NULL, NULL, FALSE, 0, NULL, NULL, &startupInfo, &processInfo );
+    proc = Api.CreateProcessA( Command, Arguments, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &startupInfo, &processInfo );
     if( proc == FALSE )
     {
         BeaconApi->BeaconPrintf( CALLBACK_ERROR, "Failed to create process" );
